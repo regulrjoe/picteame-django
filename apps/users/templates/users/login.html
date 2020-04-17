@@ -1,0 +1,24 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% block content %}
+
+<h2>Login</h2>
+<form method="POST" action="">
+	{% csrf_token %}
+	{% for field in login_form %}
+		<p>
+			{{field.label}}
+			{{field}}
+		</p>
+	{% endfor %}
+
+	<p>
+		{% for m in messages %}
+			<small id='messages' style='color:red;'>{{ m }}</small>
+		{% endfor %}
+	</p>
+
+	<input type="submit" name="Login">
+</form>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'home/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<h2>Hello, Pictea.me!</h2>
+
+<p>
+    {% for u in users %}
+        <p>{{u.email}} - {{u.username}}</p>
+    {% endfor %}
+</p>
+
+{% endblock %}
