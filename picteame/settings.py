@@ -146,4 +146,12 @@ GOOGLE_API_KEY = 'AIzaSyCmBYtx3VxsVFXzNobwCwWAFtKufBYs9nY'
 
 #AUTHENTICATION_BACKENDS = ('app_main.backends.EmailAuthBackend',)
 
-AUTH_USER_MODEL = 'users.CustomUser'
+#SITE_ID = 1
+
+# SMTP Configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'jrgvmm@gmail.com'
+EMAIL_HOST_PASSWORD = 'GolfEchoTango3!'
