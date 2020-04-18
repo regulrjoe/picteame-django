@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractBaseUser
 from phonenumber_field.modelfields import PhoneNumberField
 from django_countries.fields import CountryField
 
-from .managers import CustomUserManager
+from .managers import UserAccountManager
 
 # Create your models here.
 # ------------------------
@@ -31,7 +31,7 @@ class Address(models.Model):
 
 
 # ------------------------
-class CustomUser(AbstractBaseUser):
+class UserAccount(AbstractBaseUser):
     name            = models.CharField(max_length=100)
     email           = models.EmailField(verbose_name='email', max_length=70, unique=True)
     username        = models.CharField(max_length=30, unique=True)
@@ -47,7 +47,7 @@ class CustomUser(AbstractBaseUser):
 
     USERNAME_FIELD  = 'email'
 
-    objects = CustomUserManager()
+    objects = UserAccountManager()
 
     def __str__(self):
         return self.username

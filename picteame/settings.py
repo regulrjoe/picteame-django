@@ -144,7 +144,7 @@ STATICFILES_DIRS = [
 
 GOOGLE_API_KEY = 'AIzaSyCmBYtx3VxsVFXzNobwCwWAFtKufBYs9nY'
 
-#AUTHENTICATION_BACKENDS = ('app_main.backends.EmailAuthBackend',)
+AUTH_USER_MODEL = 'users.UserAccount'
 
 #SITE_ID = 1
 

@@ -1,2 +1,3 @@
 */migrations/000*
-*/__pycache__
+__pycache__
+*.swp
