@@ -41,9 +41,7 @@ INSTALLED_APPS = [
     # Ours
     'apps.users',
     'apps.home',
-#    'app_main',
-#    'app_talent',
-#    'app_customer',
+    'apps.models',
 
     # 3rd Party
     'django_countries',
