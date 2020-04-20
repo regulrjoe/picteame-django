@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 from phonenumber_field.modelfields import PhoneNumberField
-from apps.models.models import Address, City, CustomerProfile, TalentProfile
+from apps.core.models import Address, City, CustomerProfile, TalentProfile
 
 from .managers import UserAccountManager
 
@@ -26,7 +26,8 @@ class UserAccount(AbstractBaseUser):
     is_superuser    = models.BooleanField(default=False)
     is_talent       = models.BooleanField(default=False)
 
-    USERNAME_FIELD  = 'email'
+    USERNAME_FIELD  = 'username'
+    REQUIRED_FIELDS = ['email']
 
     objects = UserAccountManager()
 

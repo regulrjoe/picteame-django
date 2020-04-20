@@ -39,9 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Ours
+    'apps.core',
     'apps.users',
-    'apps.home',
-    'apps.models',
+    'apps.newsletter',
 
     # 3rd Party
     'django_countries',
@@ -116,7 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-mx'
 
 TIME_ZONE = 'UTC'
 
@@ -139,17 +139,26 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
+AUTH_USER_MODEL = 'users.UserAccount'
 
 GOOGLE_API_KEY = 'AIzaSyCmBYtx3VxsVFXzNobwCwWAFtKufBYs9nY'
 
-AUTH_USER_MODEL = 'users.UserAccount'
-
 #SITE_ID = 1
 
-# SMTP Configuration
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+# SMTP Configuration for GMAIL
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#EMAIL_HOST = 'smtp.gmail.com'
+#EMAIL_PORT = 587
+#EMAIL_USE_TLS = True
+#EMAIL_HOST_USER = 'jrgvmm@gmail.com'
+#EMAIL_HOST_PASSWORD = 'GolfEchoTango3!'
+
+# SendGrid
+SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
+
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'jrgvmm@gmail.com'
-EMAIL_HOST_PASSWORD = 'GolfEchoTango3!'
+NOREPLY_EMAIL = 'noreply@pictea.me'

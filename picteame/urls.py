@@ -22,7 +22,8 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('apps.users.urls')),
-    path('', include('apps.home.urls')),
+    path('', include('apps.core.urls')),
+    path('newsletter/', include('apps.newsletter.urls')),
 ]
 
 url_patterns = static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

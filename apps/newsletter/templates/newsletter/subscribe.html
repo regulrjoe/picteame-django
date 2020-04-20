@@ -1,0 +1,29 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+	<div class="col-12">
+		<h1>Boletín por Email</h1>
+	</div>
+	<div class="col-12">
+		{% if email %}
+			{% if denied %}
+				<p>El correo {{ email }} ya está suscrito.</p>
+			{% else %}
+				<p>Un correo de confirmación ha sido enviado a {{ email }}. Por favor checa tu bandeja de entrada 📥.</p>
+			{% endif %}
+		{% endif %}
+	</div>
+	{% if subscriber_form %}
+		<div class="col-12 col-md-4">
+			<form method="post" novalidate>
+				{% csrf_token %}
+				{{ subscriber_form }}
+				<br>
+				<button type="submit" class="btn btn-success">¡Subscríbeme!</button>
+			</form>
+		</div>
+	{% endif %}
+</div>
+
+{% endblock %}

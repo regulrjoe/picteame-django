@@ -8,5 +8,5 @@ def home_view(request):
     context = {}
     users = UserAccount.objects.all()
     context['users'] = users
-    return render(request, 'home/home.html', context)
+    return render(request, 'core/home.html', context)
 
