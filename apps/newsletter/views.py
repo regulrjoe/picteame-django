@@ -14,7 +14,7 @@ from .helpers import random_digits
 
 # ------------------------
 @csrf_exempt
-def subscribe_view(request):
+def subscribe_talent_view(request):
     context = {}
     form = SubscriberForm()
 
@@ -36,6 +36,7 @@ def subscribe_view(request):
 
         if not exists:
             sub = Subscriber(email=request.POST['email'], conf_num=random_digits())
+            sub.is_talent = True
             sub.save()
 
         if not confirmed:
@@ -55,7 +56,7 @@ def subscribe_view(request):
         # GET request
         context['subscriber_form'] = form
 
-    return render(request, 'newsletter/subscribe.html', context)
+    return render(request, 'newsletter/subscribe_talent.html', context)
 
 
 # ------------------------
