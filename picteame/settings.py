@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'picteame.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'APP',
+        'NAME': 'picteame',
         'USER': 'joevzq',
         'PASSWORD': 942902,
         'HOST': 'localhost',
