@@ -42,7 +42,7 @@ def subscribe_talent_view(request):
         if not confirmed:
             message = Mail(from_email = settings.NOREPLY_EMAIL,
                     to_emails = sub.email,
-                    subject = 'Confirmación de Subscripción a Boletín de Pictea.me',
+                    subject = 'Confirmación de Subscripción a Boletín de Picteame',
                     html_content = '<strong>¡Gracias por suscribirte a nuestro boletín!</strong><p>Por favor completa el proceso dando <a href="{}/confirm/?email={}&conf_num={}">click aquí</a> para confirmar tu registro.</p><p>No queremos que alguien esté registrando tu correo sin tu consentimiento.</p><small><a href="{}/unsubscribe/?email={}&conf_num={}">Date the baja</a></small>'.format(request.build_absolute_uri('localhost:8000/newsletter'), sub.email, sub.conf_num, request.build_absolute_uri('localhost:8000/newsletter'), sub.email, sub.conf_num))
             try:
                 sg = SendGridAPIClient(settings.SENDGRID_API_KEY)

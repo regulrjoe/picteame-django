@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
-from .decorators import unauthenticated_user, allowed_users
+from .decorators import unauthenticated_user
 from .forms import RegisterForm, LoginForm
 
 # ----------------------

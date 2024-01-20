@@ -25,7 +25,9 @@ SECRET_KEY = '0-(0gjfc7cfj1je(1-vm66+8)r(w=3vjtfl-_7!jhxi!*z0sx#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '192.168.1.159'
+        ]
 
 
 # Application definition
@@ -39,8 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Ours
-    'apps.core',
     'apps.users',
+    'apps.core',
     'apps.newsletter',
 
     # 3rd Party
@@ -139,7 +141,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
-AUTH_USER_MODEL = 'users.UserAccount'
+AUTH_USER_MODEL = 'users.TalentAccount'
 
 GOOGLE_API_KEY = 'AIzaSyCmBYtx3VxsVFXzNobwCwWAFtKufBYs9nY'
 
@@ -161,4 +163,4 @@ EMAIL_HOST_USER = 'apikey'
 EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-NOREPLY_EMAIL = 'noreply@pictea.me'
+NOREPLY_EMAIL = 'noreply@picteame.com'

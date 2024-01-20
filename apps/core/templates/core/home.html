@@ -4,12 +4,33 @@
 
 {% block content %}
 
-<h2>Hello, Pictea.me!</h2>
+<form class="form-inline my-4 d-flex justify-content-center" method="GET" action="">
+    <div class="input-group w-75"> <!-- Added w-75 class to occupy 75% of the width -->
+        <input type="text" class="form-control" name="search" placeholder="Search talents">
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </div>
+    </div>
+</form>
 
-<p>
-    {% for u in users %}
-        <p>{{u.email}} - {{u.username}}</p>
-    {% endfor %}
-</p>
-
+<div class="container">
+    <div class="row">
+        {% for u in users %}
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{u.name}}</h5>
+                    <p class="card-text">Categories: 
+                        {% for c in u.categories.all %}
+                            {{c.name}}
+                        {% endfor %}
+                    </p>
+                    <p class="card-text">Location: {{u.city}}</p>
+                    <a href="#" class="btn btn-primary">View Profile</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}
