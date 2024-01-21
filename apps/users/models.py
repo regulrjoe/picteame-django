@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 from phonenumber_field.modelfields import PhoneNumberField
+from image_cropping import ImageRatioField
 
 from .managers import UserAccountManager
 
@@ -11,9 +12,10 @@ class TalentAccount(AbstractBaseUser):
     name                = models.CharField(max_length=100)
     email               = models.EmailField(verbose_name='email', max_length=70, unique=True)
     phone               = PhoneNumberField(null=True)
-    profile_picture     = models.ImageField(default="logo.png", blank=True, null=True)
+    profile_picture     = models.ImageField(default="logo.png", upload_to='profile_pictures', blank=True, null=True)
     city                = models.ForeignKey('core.City', on_delete=models.SET_NULL, null=True)
     categories          = models.ManyToManyField('core.Category', null=True)
+    pp_cropping = ImageRatioField('profile_picture', '430x430')
     # fees              = added as a one-to-many relationship in core.Fee
     # photos            = added as a one-to-many relationship in core.Photo
 

@@ -1,5 +1,9 @@
 from django.contrib import admin
 from .models import TalentAccount
 
-# Register your models here.
-admin.site.register(TalentAccount)
+from image_cropping import ImageCroppingMixin
+
+class TalentAccountAdmin(ImageCroppingMixin, admin.ModelAdmin):
+	pass
+
+admin.site.register(TalentAccount, TalentAccountAdmin)

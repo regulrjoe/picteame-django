@@ -17,7 +17,7 @@ def home_view(request):
             models.Q(name__icontains=query)
         )
 
-    users = users.exclude(is_superuser=True).exclude(is_staff=True) .exclude(is_admin=True)
+    users = users.exclude(is_superuser=True).exclude(is_staff=True).exclude(is_admin=True)
 
     context = {'users': users, 'query': query}
     return render(request, 'core/home.html', context)
