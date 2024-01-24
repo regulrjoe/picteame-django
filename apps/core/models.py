@@ -7,7 +7,7 @@ class City(models.Model):
     state = models.CharField('State', max_length=100)
     country = CountryField(default='MX')
 
-    date_created = models.DateTimeField(auto_now_add=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.city  + ', ' + self.state + ' ' + self.country.code
@@ -16,7 +16,7 @@ class City(models.Model):
 class Category(models.Model):
     name = models.CharField('Categoy name', max_length=100, unique=True)
 
-    date_created = models.DateTimeField(auto_now_add=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
@@ -30,7 +30,7 @@ class Fee(models.Model):
     price_per_hour = models.FloatField()
     photos_per_hour = models.IntegerField()
 
-    date_created = models.DateTimeField(auto_now_add=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         if self.title:
@@ -44,6 +44,7 @@ class Fee(models.Model):
 # ------------------------
 class Photo(models.Model):
     image = models.ImageField(blank=False, null=True)
-    talent = models.ForeignKey('users.TalentAccount', on_delete=models.SET_NULL, null=True)
+    talent = models.ForeignKey('users.TalentAccount', on_delete=models.CASCADE, null=True)
     categories = models.ManyToManyField(Category)
-    date_created = models.DateTimeField(auto_now_add=True, null=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)

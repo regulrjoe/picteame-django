@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 
 # ----------------------
 def home_view(request):
-    query = request.GET.get('search')
+    query = request.GET.get('query')
     users = TalentAccount.objects.all().distinct()
 
     if query:
@@ -16,7 +16,7 @@ def home_view(request):
             models.Q(categories__name__icontains=query) |
             models.Q(name__icontains=query)
         )
-
+    
     users = users.exclude(is_superuser=True).exclude(is_staff=True).exclude(is_admin=True)
 
     context = {'users': users, 'query': query}

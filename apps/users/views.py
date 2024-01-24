@@ -3,12 +3,12 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
 from django.conf import Settings
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 
 from .decorators import unauthenticated_user
-from .forms import RegisterForm, LoginForm
+from .forms import RegisterForm, LoginForm, ProfilePictureUploadForm
 from .models import TalentAccount
 from django.views.generic.base import View
 
@@ -54,20 +54,31 @@ def login_view(request):
     context['login_form'] = form
     return render(request, 'users/login.html', context)
 
-
 # ----------------------
+@login_required
 def logout_view(request):
     logout(request)
     return redirect('home')
 
-def profile_picture_uploader_view(request):
+# ----------------------
+@login_required
+def profile_picture_upload_view(request):
     context = {}
-    form = UploadAndCropProfilePictureForm()
+
     if request.POST:
-        form = UploadAndCropProfilePictureForm(request.POST, request.FILES)
+        form = ProfilePictureUploadForm(request.POST, request.FILES, instance=request.user)
+
         if form.is_valid():
             form.save()
             return redirect('home')
 
-    context['form'] = form
+    else:
+        form = ProfilePictureUploadForm(instance=request.user)
+
+    context['profile_picture_uploader_form'] = form
     return render(request, 'users/profile_picture_uploader.html', context)
+
+# ----------------------
+def talent_profile_view(request, user_id):
+    user = get_object_or_404(TalentAccount, pk=user_id)
+    return render(request, 'users/talent_profile.html', {'user': user})

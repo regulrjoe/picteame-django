@@ -1,0 +1,12 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+
+<h2>Upload your profile picture</h2>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+	{{ profile_picture_uploader_form.as_p }}
+    <button type="submit" class="btn btn-primary">Upload Profile Picture</button>
+</form>
+
+{% endblock %}
