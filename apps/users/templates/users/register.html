@@ -2,27 +2,38 @@
 {% load static %}
 {% block content %}
 
-<h2>Register</h2>
-<form method="POST" action="">
-	{% csrf_token %}
-	{% for field in register_form %}
-		<p>
-			{{field.label}}
-			{{field}}
+<div class="container d-flex justify-content-center">
+	<div class="row">
+		<div class="col">
+			<div class="card"></div>
+				<div class="card-body">
+
+					<p class="card-title">Forma de registro</p>
+					<form method="POST" action="">
+						{% csrf_token %}
+						{% for field in register_form %}
+							<p>
+								{{field.label}}
+								{{field}}
 
 
-			{% if field.help_text %}
-				<small style="color: grey;">{{field.help_text}}</small>
-			{% endif %}
+								{% if field.help_text %}
+									<small style="color: grey;">{{field.help_text}}</small>
+								{% endif %}
 
-			{% for error in field.errors %}
-				<p style="color: red;">{{error}}</p>
-			{% endfor %}
+								{% for error in field.errors %}
+									<p style="color: red;">{{error}}</p>
+								{% endfor %}
 
-		</p>
-	{% endfor %}
+							</p>
+						{% endfor %}
 
-	<input type="submit" name="Register">
-</form>
+						<input type="submit" name="Register" class="btn btn-primary" value="Registrarse">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
 {% endblock %}

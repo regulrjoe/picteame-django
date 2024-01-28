@@ -2,25 +2,34 @@
 {% load static %}
 {% block content %}
 
-<h2>Login</h2>
-<form method="POST" action="">
-	{% csrf_token %}
-	{% for field in login_form %}
-		<p>
-			{{field.label}}
-			{{field}}
-		</p>
-	{% endfor %}
-
-	<p>
-		{% for m in messages %}
-			<small id='messages' style='color:red;'>{{ m }}</small>
-		{% endfor %}
-	</p>
-
-	<input type="submit" name="Login">
-</form>
-
-<a href="{% url 'password_reset' %}">¿Olvidaste tu contraseña?</a>
+<div class="container d-flex justify-content-center">
+	<div class="row">
+		<div class="col">
+			<div class="card"></div>
+				<div class="card-body">
+					<p class="card-title">Login</p>
+					<form method="POST" action="">
+						{% csrf_token %}
+						{% for field in login_form %}
+							<p>
+								{{field.label}}
+								{{field}}
+							</p>
+						{% endfor %}
+						<p>
+							{% for m in messages %}
+								<small id='messages' style='color:red;'>{{ m }}</small>
+							{% endfor %}
+						</p>
+						<input type="submit" name="Login" class="btn btn-primary" value="Login">
+					</form>
+					<p class="card-text">
+					<a href="{% url 'password_reset' %}">¿Olvidaste tu contraseña?</a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
 {% endblock %}
