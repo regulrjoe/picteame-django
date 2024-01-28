@@ -40,11 +40,11 @@
 					<p class="card-subtitle">{{user.city}}</p>
 					<p class="card-text">
 						{% for c in user.categories.all %}
-								<span class="badge badge-primary rounded-pill">{{c.name}}</span>
+								<span class="badge badge-primary">{{c}}</span>
 						{% endfor %}
 					</p>
 					<p class="card-text">
-						The card-body class in Bootstrap is used to pad the content inside the card. It's a container for the actual content you want to display within the card.
+						{{user.greeting}}
 					</p>
 					<p class="card-text">
 						{% if user.contact_phone %}
@@ -59,7 +59,9 @@
 						{% endif %}
 						{% if user.contact_website %}
 							<p>
-								<i class="fas fa-globe"></i> {{user.contact_website}}
+								<a href="{{user.contact_website}}">
+									<i class="fas fa-globe"></i> {{user.contact_website}}
+								</a>
 							</p>
 						{% endif %}
 						{% if user.contact_instagram %}

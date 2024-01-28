@@ -20,6 +20,8 @@ class TalentAccount(AbstractBaseUser):
     contact_website     = models.URLField(max_length=100, null=True)
     contact_instagram   = models.CharField(max_length=50, null=True)
 
+    greeting            = models.TextField(null=True)
+
     # fees              = added as a one-to-many relationship in core.Fee
     # photos            = added as a one-to-many relationship in core.Photo
 

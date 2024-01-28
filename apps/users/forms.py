@@ -30,6 +30,7 @@ class TalentEditForm(forms.ModelForm):
     name = forms.CharField(required=False, )
     profile_picture = forms.ImageField(required=False)
     categories = forms.ModelMultipleChoiceField(queryset=Category.objects.all(), widget=forms.CheckboxSelectMultiple, required=False)
+    greeting = forms.TextInput()
     contact_email = forms.EmailField(required=False)
     contact_phone = forms.CharField(required=False)
     contact_website = forms.URLField(required=False)
@@ -40,6 +41,7 @@ class TalentEditForm(forms.ModelForm):
         model = TalentAccount
         fields = ['name', 'city', 'profile_picture', 
                   'categories', 
+                  'greeting',
                   'contact_email', 'contact_phone', 'contact_website', 'contact_instagram']
 
     def __init__(self, *args, **kwargs):
@@ -50,6 +52,7 @@ class TalentEditForm(forms.ModelForm):
             self.fields['city'].initial = instance.city
             self.fields['profile_picture'].initial = instance.profile_picture
             self.fields['categories'].initial = instance.categories
+            self.fields['greeting'].initial = instance.greeting
             self.fields['contact_email'].initial = instance.contact_email
             self.fields['contact_phone'].initial = instance.contact_phone
             self.fields['contact_website'].initial = instance.contact_website
