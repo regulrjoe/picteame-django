@@ -35,14 +35,17 @@ class TalentEditForm(forms.ModelForm):
     contact_phone = forms.CharField(required=False)
     contact_website = forms.URLField(required=False)
     contact_instagram = forms.CharField(required=False)
-    fees = forms.CharField(required=False)
 
     class Meta:
         model = TalentAccount
-        fields = ['name', 'city', 'profile_picture', 
+        fields = ['profile_picture',
+                  'name', 'city',
                   'categories', 
                   'greeting',
-                  'contact_email', 'contact_phone', 'contact_website', 'contact_instagram']
+                  'contact_email', 
+                  'contact_phone', 
+                  'contact_website', 
+                  'contact_instagram']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -50,7 +53,7 @@ class TalentEditForm(forms.ModelForm):
         if instance:
             self.fields['name'].initial = instance.name
             self.fields['city'].initial = instance.city
-            self.fields['profile_picture'].initial = instance.profile_picture
+            # self.fields['profile_picture'].initial = instance.profile_picture
             self.fields['categories'].initial = instance.categories
             self.fields['greeting'].initial = instance.greeting
             self.fields['contact_email'].initial = instance.contact_email
