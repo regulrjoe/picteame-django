@@ -7,15 +7,6 @@ from .managers import UserAccountManager
 
 # Create your models here.
 
-class ContactInfo(models.Model):
-    email = models.EmailField(verbose_name='email', max_length=70, unique=True)
-    phone = PhoneNumberField(null=True)
-    message = models.TextField(max_length=500)
-    website = models.URLField(max_length=200, null=True)
-
-    def __str__(self):
-        return self.name
-
 # ------------------------
 class TalentAccount(AbstractBaseUser):
     name                = models.CharField(max_length=100)
@@ -24,10 +15,13 @@ class TalentAccount(AbstractBaseUser):
     profile_picture     = models.ImageField(upload_to='profile_pictures', blank=False, null=True)
     city                = models.ForeignKey('core.City', on_delete=models.SET_NULL, null=True)
     categories          = models.ManyToManyField('core.Category', null=True)
+    contact_email       = models.EmailField(verbose_name='email', max_length=70, unique=True, null=True)
+    contact_phone       = PhoneNumberField(null=True)
+    contact_website     = models.URLField(max_length=100, null=True)
+    contact_instagram   = models.CharField(max_length=50, null=True)
+
     # fees              = added as a one-to-many relationship in core.Fee
     # photos            = added as a one-to-many relationship in core.Photo
-
-    contact_info        = models.OneToOneField(ContactInfo, on_delete=models.SET_NULL, null=True)
 
     created_at     = models.DateTimeField(verbose_name='created_at', auto_now_add=True)
     last_login      = models.DateTimeField(verbose_name='last login', auto_now=True)
@@ -41,7 +35,7 @@ class TalentAccount(AbstractBaseUser):
     objects = UserAccountManager()
 
     def __str__(self):
-        return self.email
+        return '%s | %s' % (self.email, self.name)
 
     def has_perm(self, perm, obj=None):
         return self.is_staff

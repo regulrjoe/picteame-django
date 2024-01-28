@@ -2,15 +2,22 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.edit import UpdateView
+from django.urls import reverse_lazy
+from django.contrib.auth import get_user_model
+
 from django.conf import Settings
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 
 from .decorators import unauthenticated_user
-from .forms import RegisterForm, LoginForm, ProfilePictureUploadForm
+from .forms import RegisterForm, LoginForm, ProfilePictureUploadForm, TalentEditForm
 from .models import TalentAccount
 from django.views.generic.base import View
+from django.contrib.auth import get_user
+from django.shortcuts import redirect
 
 
 # ----------------------
@@ -79,6 +86,32 @@ def profile_picture_upload_view(request):
     return render(request, 'users/profile_picture_uploader.html', context)
 
 # ----------------------
-def talent_profile_view(request, user_id):
+def talent_view(request, user_id):
     user = get_object_or_404(TalentAccount, pk=user_id)
     return render(request, 'users/talent_profile.html', {'user': user})
+
+
+@login_required
+def talent_edit_view(request):
+    context = {}
+
+    # user = get_user(request)
+
+    if request.POST:
+        talent_form = TalentEditForm(request.POST, request.FILES, instance=request.user)
+
+        if talent_form.is_valid():
+
+            if request.user.contact_instagram[0] == '@':
+                request.user.contact_instagram = request.user.contact_instagram[1:]
+
+            talent_form.save()
+            
+            return redirect('talent_profile', user_id=request.user.id)
+
+    else:
+        talent_form = TalentEditForm(instance=request.user)
+
+    context['talent_form'] = talent_form
+
+    return render(request, 'users/talent_edit.html', context)
