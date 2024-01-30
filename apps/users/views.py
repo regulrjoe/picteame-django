@@ -13,8 +13,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 
 from .decorators import unauthenticated_user
-from .forms import RegisterForm, LoginForm, ProfilePictureUploadForm, TalentEditForm
+from .forms import RegisterForm, LoginForm, TalentEditForm
 from .models import TalentAccount
+from apps.core.models import Photo
 from django.views.generic.base import View
 from django.contrib.auth import get_user
 from django.shortcuts import redirect
@@ -66,24 +67,6 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('home')
-
-# ----------------------
-@login_required
-def profile_picture_upload_view(request):
-    context = {}
-
-    if request.POST:
-        form = ProfilePictureUploadForm(request.POST, request.FILES, instance=request.user)
-
-        if form.is_valid():
-            form.save()
-            return redirect('home')
-
-    else:
-        form = ProfilePictureUploadForm(instance=request.user)
-
-    context['profile_picture_uploader_form'] = form
-    return render(request, 'users/profile_picture_uploader.html', context)
 
 # ----------------------
 def talent_view(request, user_id):

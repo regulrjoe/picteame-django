@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate
 from image_cropping import ImageCropWidget
 
+
 from .models import TalentAccount
 from apps.core.models import Category
 
@@ -20,11 +21,6 @@ class LoginForm(forms.ModelForm):
     class Meta:
         model = TalentAccount
         fields = ['email', 'password']
-
-class ProfilePictureUploadForm(forms.ModelForm):
-    class Meta:
-        model = TalentAccount
-        fields = ['profile_picture']
 
 class TalentEditForm(forms.ModelForm):
     name = forms.CharField(required=False, )

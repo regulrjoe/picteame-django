@@ -10,7 +10,6 @@ urlpatterns = [
     path('password-reset-sent/', auth_views.PasswordResetDoneView.as_view(template_name='users/password_reset_sent.html'), name='password_reset_done'),
     path('password-reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='users/password_reset_form.html'), name='password_reset_confirm'),
     path('password-reset-complete/',  auth_views.PasswordResetCompleteView.as_view(template_name='users/password_reset_complete.html'), name='password_reset_complete'),
-    path('profile_picture_uploader/', views.profile_picture_upload_view, name='profile_picture_uploader'),
     path('talent/<int:user_id>/', views.talent_view, name='talent_profile'),
     path('profile/edit/', views.talent_edit_view, name='talent_edit'),
 ]
