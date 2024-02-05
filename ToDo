@@ -1,0 +1,2 @@
+Fix Settings to include jQuery. Currently it's not found.
+With that, ensure that the inline form set of photos is working properly.

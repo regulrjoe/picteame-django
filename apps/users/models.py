@@ -12,7 +12,7 @@ class TalentAccount(AbstractBaseUser):
     name                = models.CharField(max_length=100)
     email               = models.EmailField(verbose_name='email', max_length=70, unique=True)
     phone               = PhoneNumberField(null=True)
-    profile_picture     = models.ImageField(upload_to='profile_pictures', blank=False, null=True)
+    profile_picture     = models.ImageField(upload_to='profile_pictures', blank=True, null=True, default='profile_pictures/default_profile_picture.png')
     city                = models.ForeignKey('core.City', on_delete=models.SET_NULL, null=True)
     categories          = models.ManyToManyField('core.Category', null=True)
     contact_email       = models.EmailField(verbose_name='email', max_length=70, unique=True, null=True)
@@ -25,7 +25,7 @@ class TalentAccount(AbstractBaseUser):
     # fees              = added as a one-to-many relationship in core.Fee
     # photos            = added as a one-to-many relationship in core.Photo
 
-    created_at     = models.DateTimeField(verbose_name='created_at', auto_now_add=True)
+    created_at      = models.DateTimeField(verbose_name='created_at', auto_now_add=True)
     last_login      = models.DateTimeField(verbose_name='last login', auto_now=True)
     is_active       = models.BooleanField(default=True)
     is_staff        = models.BooleanField(default=False)

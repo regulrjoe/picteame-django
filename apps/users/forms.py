@@ -2,10 +2,11 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate
 from image_cropping import ImageCropWidget
+from django.forms import fields, models, formsets, widgets
 
 
 from .models import TalentAccount
-from apps.core.models import Category
+from apps.core.models import Category, Photo
 
 # ----------------------------
 class RegisterForm(UserCreationForm):
@@ -43,16 +44,13 @@ class TalentEditForm(forms.ModelForm):
                   'contact_website', 
                   'contact_instagram']
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        instance = kwargs.get('instance')
-        if instance:
-            self.fields['name'].initial = instance.name
-            self.fields['city'].initial = instance.city
-            # self.fields['profile_picture'].initial = instance.profile_picture
-            self.fields['categories'].initial = instance.categories
-            self.fields['greeting'].initial = instance.greeting
-            self.fields['contact_email'].initial = instance.contact_email
-            self.fields['contact_phone'].initial = instance.contact_phone
-            self.fields['contact_website'].initial = instance.contact_website
-            self.fields['contact_instagram'].initial = instance.contact_instagram
+class TalentPhotosForm(forms.ModelForm):
+    image = forms.ImageField(required=True)
+    categories = forms.ModelMultipleChoiceField(queryset=Category.objects.all(), widget=forms.CheckboxSelectMultiple, required=False)
+
+    class Meta:
+        model = Photo
+        fields = ['image', 'categories', 'talent']
+
+def get_photos_formset(form, formset=models.BaseInlineFormSet, **kwargs):
+    return models.inlineformset_factory(TalentAccount, Photo, form, formset, **kwargs)

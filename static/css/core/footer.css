@@ -1,26 +1,6 @@
-/* Add this code to your styles.css */
-footer {
-    background-color: #1b1b1b;
-    color: #fff;
-	position: absolute;
-	bottom: 0;
+  .footer {
     width: 100%;
-}
-
-footer a {
-    color: #fff;
-    transition: color 0.3s ease;
-}
-
-footer a:hover {
-    color: #007bff;
-}
-
-.btn-social {
-    width: 40px;
-    height: 40px;
-    padding: 0;
-    font-size: 18px;
-    text-align: center;
-    line-height: 40px;
-}
+    height: 60px; /* Set the fixed height of the footer here */
+    line-height: 60px; /* Vertically center the text there */
+    background-color: #666666;
+  }

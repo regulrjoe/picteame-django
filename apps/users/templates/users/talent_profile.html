@@ -26,6 +26,11 @@
 							</a>
 						</div>
 					</div>
+					<div class="card-footer">
+						{% if user == request.user %}
+							<a href="{% url 'talent_edit' %}" class="btn btn-primary">Editar</a>
+						{% endif %}
+					</div>
 				</div>
 			</div>
 		</div>

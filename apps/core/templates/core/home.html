@@ -49,12 +49,15 @@
                                     <h5 class="card-title">{{u.name}}</h5>
                                 </a>
                                 <p class="card-subtitle">{{u.city}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
                                 <p class="card-text">
                                     {% for c in u.categories.all %}
-                                        <span class="badge badge-primary rounded-pill">{{c.name}}</span>
+                                        <span class="badge badge-primary">{{c.name}}</span>
                                     {% endfor %}
                                 </p>
-                                <a href="/talent/{{u.id}}" class="btn btn-primary">View Profile</a>
                             </div>
                         </div>
                     </div>  

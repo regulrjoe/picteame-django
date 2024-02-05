@@ -1,5 +1,27 @@
 {% extends 'core/base.html' %}
 {% load static %}
+
+{% block title %}Basic Formset (DIV layout){% endblock %}
+
+{% block extrahead %}
+<script>
+	$(document).ready(function(){
+
+		$('#photos_table tbody tr').formset({
+			// For inline formsets, be sure to set the prefix, as the default prefix
+			// ('form') isn't correct.
+			// Django appears to generate the prefix from the lowercase plural
+			// name of the related model, with camel-case converted to underscores.
+			prefix: 'photos'
+		});
+
+	});
+
+</script>
+{% endblock %}
+
+
+
 {% block content %}
 
 <div class="container d-flex justify-content-center">
@@ -13,12 +35,44 @@
 					<form method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
                         {{ talent_form.as_p }}
+
+								<div class="card">
+									<div class="card-body">
+
+						<table id="photos_table" border="0" cellpadding="0" cellspacing="5">
+							<thead>
+								<tr>
+									<th scope="col">Image</th>
+									<th scope="col">Categories</th>
+								</tr>
+							</thead>
+							<tbody>
+
+								{% for form in photos_formset.forms %}
+								<tr id="{{ form.prefix }}-row">
+									<td>
+										<p>
+										{% for fld in form.hidden_fields %}{{ fld }}{% endfor %}
+										{% if form.instance.pk %}{{ form.DELETE }}{% endif %}
+										{{ form.image }}
+									</td>
+									<td>{{ form.categories }}</td>
+								</tr>
+
+								{% endfor %}
+
+							</tbody>
+						</table>
+						<p>
+							{{ photos_formset.management_form }}
+						</p>
                         <button type="submit" class="btn btn-primary">Update</button>
+
+						</div>
+						</div>
                     </form>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
-
 {% endblock %}
