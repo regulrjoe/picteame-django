@@ -43,14 +43,3 @@ class TalentEditForm(forms.ModelForm):
                   'contact_phone', 
                   'contact_website', 
                   'contact_instagram']
-
-class TalentPhotosForm(forms.ModelForm):
-    image = forms.ImageField(required=True)
-    categories = forms.ModelMultipleChoiceField(queryset=Category.objects.all(), widget=forms.CheckboxSelectMultiple, required=False)
-
-    class Meta:
-        model = Photo
-        fields = ['image', 'categories', 'talent']
-
-def get_photos_formset(form, formset=models.BaseInlineFormSet, **kwargs):
-    return models.inlineformset_factory(TalentAccount, Photo, form, formset, **kwargs)

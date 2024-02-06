@@ -36,40 +36,15 @@
                         {% csrf_token %}
                         {{ talent_form.as_p }}
 
-								<div class="card">
-									<div class="card-body">
-
-						<table id="photos_table" border="0" cellpadding="0" cellspacing="5">
-							<thead>
-								<tr>
-									<th scope="col">Image</th>
-									<th scope="col">Categories</th>
-								</tr>
-							</thead>
-							<tbody>
-
-								{% for form in photos_formset.forms %}
-								<tr id="{{ form.prefix }}-row">
-									<td>
-										<p>
-										{% for fld in form.hidden_fields %}{{ fld }}{% endfor %}
-										{% if form.instance.pk %}{{ form.DELETE }}{% endif %}
-										{{ form.image }}
-									</td>
-									<td>{{ form.categories }}</td>
-								</tr>
-
-								{% endfor %}
-
-							</tbody>
-						</table>
-						<p>
-							{{ photos_formset.management_form }}
-						</p>
-                        <button type="submit" class="btn btn-primary">Update</button>
-
+						<div class="row">
+							<div class="col">
+								<button type="submit" class="btn btn-primary">Update</button>
+							</div>  
+							<div class="col">
+								<a href="{% url 'talent_profile' request.user.id %}" class="btn btn-primary">Back</a>
+							</div>
 						</div>
-						</div>
+
                     </form>
 				</div>
 			</div>

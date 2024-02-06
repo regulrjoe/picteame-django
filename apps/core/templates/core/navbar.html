@@ -26,7 +26,7 @@
 									{{request.user.name}}
 								</a>
 								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-									<a class="dropdown-item" href="/talent/{{ request.user.id }}">My Profile</a>
+									<a class="dropdown-item" href="{% url 'talent_profile' request.user.id %}">My Profile</a>
 									{% if request.user.is_superuser %}
 										<a class="dropdown-item" href="/admin/">Admin Panel</a>
 									{% endif %}

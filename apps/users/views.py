@@ -14,7 +14,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 
 from .decorators import unauthenticated_user
-from .forms import RegisterForm, LoginForm, TalentEditForm, TalentPhotosForm, get_photos_formset
+from .forms import RegisterForm, LoginForm, TalentEditForm
 from .models import TalentAccount
 from apps.core.models import Photo
 from django.views.generic.base import View
@@ -79,51 +79,39 @@ def talent_view(request, user_id):
 def talent_edit_view(request):
     context = {}
 
-    TalentPhotosFormset = get_photos_formset(TalentPhotosForm, extra=0, can_delete=True, max_num=5, min_num=1)
-
-    photos_qs = request.user.photo_set.all()
-
-    # photos = []
-    # for photo in photos_qs:
-    photos = [photo.image for photo in photos_qs]
-
     if request.POST:
-
-        print("POST Request")
-
-
         talent_form = TalentEditForm(request.POST, request.FILES, instance=request.user)
-        photos_formset = TalentPhotosFormset(request.POST, request.FILES, instance=request.user)
-
-        print(photos_formset.prefix)
-        
-        if talent_form.is_valid() and photos_formset.is_valid():
-
-            print("Forms are valid")
-
+        if talent_form.is_valid():
             ig = request.user.contact_instagram
 
             if ig and ig[0] == '@':
                 request.user.contact_instagram = ig[1:]
 
             talent_form.save()
-            photos_formset.save()
-
-            print("Forms are saved")
-            
             return redirect('talent_profile', user_id=request.user.id)
-
-        if talent_form.is_valid() and not photos_formset.is_valid():
-            print("Talent form is valid but photos form is not valid")
-        elif not talent_form.is_valid() and photos_formset.is_valid():
-            print(photos_formset.errors)
-            print("Talent form is not valid but photos form is valid")
-
-    talent_form = TalentEditForm(instance=request.user)
-    photos_formset = TalentPhotosFormset(instance=request.user)
+    else:
+        talent_form = TalentEditForm(instance=request.user)
 
     context['talent_form'] = talent_form
-    context['photos_formset'] = photos_formset
-    context['photos'] = photos
 
     return render(request, 'users/talent_edit.html', context)
+
+
+@login_required
+def talent_edit_photos_view(request):
+    context = {}
+
+    PhotoFormSet = inlineformset_factory(TalentAccount, Photo, fields=('image', 'categories'), extra=6, can_delete=True, max_num=6, validate_max=True)
+    PhotoFormSet.form.base_fields['categories'].required = False
+
+    if request.method == 'POST':
+        formset = PhotoFormSet(request.POST, request.FILES, instance=request.user)
+        if formset.is_valid():
+            print('formset is valid')
+            formset.save()
+            return redirect('talent_profile', user_id=request.user.id)
+    else:
+        formset = PhotoFormSet(instance=request.user)
+        context = {'photos_formset': formset}
+        
+    return render(request, 'users/talent_photos_edit.html', context)
