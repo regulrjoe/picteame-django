@@ -13,6 +13,13 @@
 								{% for photo in user.photo_set.all %}
 									<div class="carousel-item {% if forloop.first %} active {% endif %}">
 									<img src="{{ photo.image.url }}" class="img-fluid" style="max-height: 500px;">
+									<div class="row">
+										<div class="col-md-12">
+											{% for c in photo.categories.all %}
+												<span class="badge badge-primary">{{c.name}}</span>
+											{% endfor %}
+										</div>
+									</div>
 								</div>
 								{% endfor %}
 							</div>
