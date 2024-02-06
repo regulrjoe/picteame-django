@@ -37,7 +37,7 @@ def register_view(request):
             user = authenticate(email=email, password=raw_password)
 
             login(request, user)
-            return redirect(reverse('profile_picture_uploader'))
+            return redirect(reverse('talent_profile', kwargs={'user_id': user.id}))
 
     context['register_form'] = form
 
