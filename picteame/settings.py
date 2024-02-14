@@ -46,11 +46,11 @@ INSTALLED_APPS = [
     'apps.newsletter',
 
     # 3rd Party
-    'django_countries',
+    # 'django_countries',
     'phonenumber_field',
     'easy_thumbnails',
     'image_cropping',
-
+    'cities_light'
 ]
 
 from easy_thumbnails.conf import Settings as thumbnail_settings

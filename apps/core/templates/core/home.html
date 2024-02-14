@@ -17,15 +17,14 @@
 
     <div class="row">
         {% for u in users %}
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-body">
+            <div class="col-sm-12 col-md-4">
+                <div class="home-grid card card-body">
                     <div id="carousel-{{u.id}}" class="carousel slide" data-ride="carousel" data-interval="false">
                         <div class="carousel-inner col-md-12">
                             {% for photo in u.photo_set.all %}
                             <div class="carousel-item {% if forloop.first %} active {% endif %}">
                             {% load thumbnail %}
-                                <img src="{% thumbnail photo.image 430x300 box=photo.cropping crop detail %}" class="img-fluid">
+                                <img src="{% thumbnail photo.image 430x300 box=photo.cropping detail %}" class="img-fluid">
                             </div>
                             {% endfor %}
                         </div>
@@ -48,22 +47,17 @@
                                 <a href="/talent/{{u.id}}">
                                     <h5 class="card-title">{{u.name}}</h5>
                                 </a>
-                                <p class="card-subtitle">{{u.city}}</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <p class="card-text">
-                                    {% for c in u.categories.all %}
-                                        <span class="badge badge-primary">{{c.name}}</span>
-                                    {% endfor %}
-                                </p>
+                                    <p class="card-subtitle">{{u.city}}</p>
                             </div>
                         </div>
                     </div>  
+                    <p class="card-subtitle">
+                        {% for c in u.categories.all %}
+                            <span class="badge badge-primary">{{c.name}}</span>
+                        {% endfor %}
+                    </p>
                 </div>
             </div>
-        </div>
         {% endfor %}
     </div>
 </div>

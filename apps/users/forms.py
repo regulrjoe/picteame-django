@@ -27,19 +27,21 @@ class TalentEditForm(forms.ModelForm):
     name = forms.CharField(required=False, )
     profile_picture = forms.ImageField(required=False)
     categories = forms.ModelMultipleChoiceField(queryset=Category.objects.all(), widget=forms.CheckboxSelectMultiple, required=False)
-    greeting = forms.TextInput()
+    greeting = forms.CharField(
+        max_length=400,
+        widget=forms.Textarea(attrs={'rows': 4}),
+        required=False)
     contact_email = forms.EmailField(required=False)
     contact_phone = forms.CharField(required=False)
-    contact_website = forms.URLField(required=False)
     contact_instagram = forms.CharField(required=False)
 
     class Meta:
         model = TalentAccount
         fields = ['profile_picture',
-                  'name', 'city',
+                  'name', 
+                  'city',
                   'categories', 
                   'greeting',
                   'contact_email', 
                   'contact_phone', 
-                  'contact_website', 
                   'contact_instagram']

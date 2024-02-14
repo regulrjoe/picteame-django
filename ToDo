@@ -1,2 +1,17 @@
-Fix Settings to include jQuery. Currently it's not found.
-With that, ensure that the inline form set of photos is working properly.
+- [x] Improve city field: https://medium.com/@FatemeFouladkar/how-to-add-country-and-city-field-in-django-864f80b4c19e
+- [ ] Improve seach controls:
+  - [ ] Allow search by category, name and city.
+  - [ ] Add control to see all categories.
+  - [ ] Figure out control for cities.
+- [ ] Improve registration flow:
+  - [ ] Add email verification: https://simpleisbetterthancomplex.com/tutorial/2017/02/21/how-to-add-email-verification-to-django.html
+    - [ ] Block photo upload until email is verified
+  - [ ] Send to edit profile and upload photos after registration
+- [ ] Delete photo file from storage when deleted by user
+
+
+
+# FOR REVEAL:
+- [ ] Create profiles
+- [ ] Hook up to picteame.com
+

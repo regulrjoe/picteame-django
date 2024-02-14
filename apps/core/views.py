@@ -12,7 +12,8 @@ def home_view(request):
 
     if query:
         users = users.filter(
-            models.Q(city__city__icontains=query) |
+            models.Q(city__name__icontains=query) |
+            models.Q(city__region__name__icontains=query) |
             models.Q(categories__name__icontains=query) |
             models.Q(name__icontains=query)
         )
@@ -21,4 +22,3 @@ def home_view(request):
 
     context = {'users': users, 'query': query}
     return render(request, 'core/home.html', context)
-

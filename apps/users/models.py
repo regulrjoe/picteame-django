@@ -13,11 +13,10 @@ class TalentAccount(AbstractBaseUser):
     email               = models.EmailField(verbose_name='email', max_length=70, unique=True)
     phone               = PhoneNumberField(null=True)
     profile_picture     = models.ImageField(upload_to='profile_pictures', blank=True, null=True, default='profile_pictures/default_profile_picture.png')
-    city                = models.ForeignKey('core.City', on_delete=models.SET_NULL, null=True)
+    city                = models.ForeignKey('core.ProxyCity', on_delete=models.SET_NULL, null=True, blank=True)
     categories          = models.ManyToManyField('core.Category', null=True)
-    contact_email       = models.EmailField(verbose_name='email', max_length=70, unique=True, null=True)
+    contact_email       = models.EmailField(verbose_name='contact_email', max_length=70, unique=False, null=True)
     contact_phone       = PhoneNumberField(null=True)
-    contact_website     = models.URLField(max_length=100, null=True)
     contact_instagram   = models.CharField(max_length=50, null=True)
 
     greeting            = models.TextField(null=True)

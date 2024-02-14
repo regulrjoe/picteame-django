@@ -1,16 +1,16 @@
 from django.db import models
 from django_countries.fields import CountryField
+from cities_light.models import City
 
 # ------------------------
-class City(models.Model):
-    city = models.CharField('City', max_length=100)
-    state = models.CharField('State', max_length=100)
-    country = CountryField(default='MX')
-
-    created_at = models.DateTimeField(auto_now_add=True)
+class ProxyCity(City):
+    class Meta:
+        proxy = True
+        verbose_name = 'City'
+        verbose_name_plural = 'Cities'
 
     def __str__(self):
-        return self.city  + ', ' + self.state + ' ' + self.country.code
+        return self.name + ", " + self.region.name
 
 # ------------------------
 class Category(models.Model):
@@ -18,17 +18,20 @@ class Category(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        verbose_name = 'Category'
+        verbose_name_plural = 'Categories'
+
     def __str__(self):
         return self.name
 
 # ------------------------
 class Fee(models.Model):
-    title = models.CharField('Fee title', max_length=128, null=True)
+    price = models.FloatField(null=False)
+    title = models.CharField('Fee title', max_length=128, null=False)
     description = models.CharField('Fee description', max_length=1024, null=True)
-    talent = models.ForeignKey('users.TalentAccount', on_delete=models.SET_NULL, null=True)
+    talent = models.ForeignKey('users.TalentAccount', on_delete=models.CASCADE, null=False)
     categories = models.ManyToManyField(Category)
-    price_per_hour = models.FloatField()
-    photos_per_hour = models.IntegerField()
 
     created_at = models.DateTimeField(auto_now_add=True)
 

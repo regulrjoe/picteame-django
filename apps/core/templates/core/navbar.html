@@ -4,7 +4,7 @@
 			<div class="col-md-4">
 				<!-- Left section -->
 				<h1 class="mb-0">
-					<a class="nav-link" href="/">Proyectito</a>
+					<a class="nav-link" href="/">Picteame</a>
 				</h1>
 				
 			</div>
@@ -24,6 +24,8 @@
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 									{{request.user.name}}
+									{% load thumbnail %}
+									<img src="{% thumbnail request.user.profile_picture 100x100 crop %}" alt="{{request.user.name}}" class="rounded-circle thumb-post" width="60" height="60">
 								</a>
 								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 									<a class="dropdown-item" href="{% url 'talent_profile' request.user.id %}">My Profile</a>
