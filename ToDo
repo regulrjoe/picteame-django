@@ -6,12 +6,25 @@
 - [ ] Improve registration flow:
   - [ ] Add email verification: https://simpleisbetterthancomplex.com/tutorial/2017/02/21/how-to-add-email-verification-to-django.html
     - [ ] Block photo upload until email is verified
-  - [ ] Send to edit profile and upload photos after registration
+  - [ ] Add Google Login
+  - [x] Send to edit profile and upload photos after registration
 - [ ] Delete photo file from storage when deleted by user
+  - [ ] Also when user is deleted.
+- [ ] Use Create/Update/DeleteViews instead of Forms where possible to simplify.
 
+
+# Move Images storage to Cloud
+- [x] Setup file cloud storage: using backblaze.
+- [ ] Upload pictures from webapp.
+  - Use ~/code/pipcteame/django-storages-backblaze-b2/b2-example-static-and-media to toy around. 
+  - Need to figure out how to customize the url. Right now everything is uploaded to /media. Want to upload to /users/user_id/
+- [ ] Load pictures from cloud storage
+- Delete pictures from cloud storage when:
+  - [ ] user explicitly deletes picture.
+  - [ ] user changes picture.
+  - [ ] user is deleted.
+- [ ] Resize pictures before upload to reduce size.
 
 
 # FOR REVEAL:
-- [ ] Create profiles
-- [ ] Hook up to picteame.com
-
+- [x] Create profiles

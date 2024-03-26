@@ -47,6 +47,7 @@ class Fee(models.Model):
 # ------------------------
 class Photo(models.Model):
     image = models.ImageField(blank=False, null=True)
+    image_url = models.CharField('Image URL', max_length=200, null=True)
     talent = models.ForeignKey('users.TalentAccount', on_delete=models.CASCADE, null=True)
     categories = models.ManyToManyField(Category)
 

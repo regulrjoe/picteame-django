@@ -24,8 +24,7 @@
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 									{{request.user.name}}
-									{% load thumbnail %}
-									<img src="{% thumbnail request.user.profile_picture 100x100 crop %}" alt="{{request.user.name}}" class="rounded-circle thumb-post" width="60" height="60">
+									<img src="{{request.user.profile_picture_b2}}" alt="{{request.user.name}}" class="rounded-circle thumb-post" width="60" height="60">
 								</a>
 								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 									<a class="dropdown-item" href="{% url 'talent_profile' request.user.id %}">My Profile</a>

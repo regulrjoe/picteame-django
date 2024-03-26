@@ -13,6 +13,7 @@ class TalentAccount(AbstractBaseUser):
     email               = models.EmailField(verbose_name='email', max_length=70, unique=True)
     phone               = PhoneNumberField(null=True)
     profile_picture     = models.ImageField(upload_to='profile_pictures', blank=True, null=True, default='profile_pictures/default_profile_picture.png')
+    profile_picture_b2  = models.CharField(max_length=200, null=True, blank=True, default="https://f005.backblazeb2.com/file/picteame-dev/defaults/default_profile_picture.png")
     city                = models.ForeignKey('core.ProxyCity', on_delete=models.SET_NULL, null=True, blank=True)
     categories          = models.ManyToManyField('core.Category', null=True)
     contact_email       = models.EmailField(verbose_name='contact_email', max_length=70, unique=False, null=True)

@@ -12,8 +12,7 @@
 			<div class="card"></div>
 				<div class="card-body">
 
-					{% load thumbnail %}
-					<img src="{% thumbnail user.profile_picture 200x200 crop%}" alt="{{user.name}}" class="thumb-post">
+					<img src="{{ user.profile_picture_b2 }}" alt="{{user.name}}" class="thumb-post" height="200" width="200">
 					<form method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
                         {{ talent_form.as_p }}

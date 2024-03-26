@@ -10,21 +10,28 @@ from apps.core.models import Category, Photo
 
 # ----------------------------
 class RegisterForm(UserCreationForm):
+    name = forms.CharField(required=True, label="Nombre")
+    email = forms.EmailField(required=True, label="Correo Electrónico")
 
     class Meta:
         model = TalentAccount
         fields = ['name', 'city', 'email', 'password1', 'password2']
+        widgets = {
+            'city': forms.Select()
+        }
+        labels = {
+            'city': 'Ciudad'
+        }
 
 # ----------------------------
 class LoginForm(forms.ModelForm):
-    password = forms.CharField(label='Password', widget=forms.PasswordInput)
 
     class Meta:
         model = TalentAccount
         fields = ['email', 'password']
 
 class TalentEditForm(forms.ModelForm):
-    name = forms.CharField(required=False, )
+    name = forms.CharField(required=False, label="Nombre")
     profile_picture = forms.ImageField(required=False)
     categories = forms.ModelMultipleChoiceField(queryset=Category.objects.all(), widget=forms.CheckboxSelectMultiple, required=False)
     greeting = forms.CharField(
@@ -37,7 +44,8 @@ class TalentEditForm(forms.ModelForm):
 
     class Meta:
         model = TalentAccount
-        fields = ['profile_picture',
+        fields = [
+                  'profile_picture_b2',
                   'name', 
                   'city',
                   'categories', 

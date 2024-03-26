@@ -40,8 +40,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">
-                                {% load thumbnail %}
-                                <img src="{% thumbnail u.profile_picture 100x100 crop %}" alt="{{u.name}}" class="rounded-circle thumb-post" width="60" height="60">
+                                <img src="{{ u.profile_picture_b2 }}" alt="{{u.name}}" class="rounded-circle thumb-post" width="60" height="60">
                             </div>
                             <div class="col-md-8">
                                 <a href="/talent/{{u.id}}">

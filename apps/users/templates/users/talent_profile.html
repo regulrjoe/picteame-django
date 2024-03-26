@@ -44,8 +44,7 @@
 		<div class="col-md-3">
 			<div class="card">
 				<div class="card-body">
-					{% load thumbnail %}
-					<img src="{% thumbnail user.profile_picture 200x200 crop%}" alt="{{user.name}}" class="thumb-post">
+					<img src="{{user.profile_picture_b2}}" alt="{{user.name}}" class="rounded-circle thumb-post" width="180" height="180">
 				</div>
 				<div class="card-body">
 					<h5 class="card-title">{{user.name}}</h5>

@@ -46,11 +46,12 @@ INSTALLED_APPS = [
     'apps.newsletter',
 
     # 3rd Party
-    # 'django_countries',
     'phonenumber_field',
     'easy_thumbnails',
     'image_cropping',
-    'cities_light'
+    'cities_light',
+    # 'b2sdk'
+    'storages'
 ]
 
 from easy_thumbnails.conf import Settings as thumbnail_settings
@@ -173,3 +174,26 @@ EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 NOREPLY_EMAIL = 'noreply@picteame.com'
+
+# Backblaze B2 Cloud Storage - File Storage for Images - B2 SDK
+## DEV app keys
+# B2_APP_KEY_ID_DEV = '005f7cceca49d800000000003'
+# B2_APP_KEY_DEV = 'K005eu6Tc5QVkxWuEswcEWu7XjAgt9c'
+# B2_BUCKET_NAME_DEV = 'picteame-dev'
+
+# Backblaze B2 Cloud Storage - File Storage for Images - AWS SDK
+## DEV app keys
+AWS_ACCESS_KEY_ID = '005f7cceca49d800000000003'
+AWS_SECRET_ACCESS_KEY = 'K005eu6Tc5QVkxWuEswcEWu7XjAgt9c'
+AWS_STORAGE_BUCKET_NAME = 'picteame-dev'
+AWS_S3_REGION_NAME = 'us-east-005'
+
+AWS_S3_ENDPOINT = f's3.{AWS_S3_REGION_NAME}.backblazeb2.com'
+AWS_S3_ENDPOINT_URL = f'https://{AWS_S3_ENDPOINT}'
+
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+
+# DEFAULT_FILE_STORAGE = 'picteame.storage_backends.MediaStorage'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
